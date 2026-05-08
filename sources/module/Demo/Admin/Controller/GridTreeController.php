@@ -1,0 +1,41 @@
+<?php
+
+namespace Module\Demo\Admin\Controller;
+
+use Illuminate\Routing\Controller;
+use ModStart\Admin\Concern\HasAdminQuickCRUD;
+use ModStart\Admin\Layout\AdminCRUDBuilder;
+use ModStart\Form\Form;
+use ModStart\Grid\GridFilter;
+use ModStart\Support\Concern\HasFields;
+use Module\Demo\Model\DemoTestCategory;
+use Module\Demo\Util\DemoTestCategoryUtil;
+
+class GridTreeController extends Controller
+{
+    use HasAdminQuickCRUD;
+
+    protected function crud(AdminCRUDBuilder $builder)
+    {
+        $builder
+            ->init(DemoTestCategory::class)
+            ->field(function ($builder) {
+                /** @var HasFields $builder */
+                $builder->id('id', 'ID');
+                $builder->text('title', '名称');
+                $builder->image('cover', '封面')->listable(false);
+                $builder->display('created_at', L('CreatedAt'))->listable(false);
+                $builder->display('updated_at', L('UpdatedAt'))->listable(false);
+            })
+            ->gridFilter(function (GridFilter $filter) {
+                $filter->eq('id', L('ID'));
+                $filter->like('title', L('Title'));
+            })
+            ->hookChanged(function (Form $form) {
+                DemoTestCategoryUtil::clearCache();
+            })
+            ->title('树状数据表格')
+            ->asTree()
+            ->treeMaxLevel(2);
+    }
+}

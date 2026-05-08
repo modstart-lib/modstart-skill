@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class DemoTestCategoryCreate extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+
+        Schema::create('demo_test_category', function (Blueprint $table) {
+
+            $table->increments('id');
+            $table->timestamps();
+            $table->integer('pid')->nullable()->comment('');
+            $table->integer('sort')->nullable()->comment('');
+
+            $table->string('title', 20)->nullable()->comment('');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //DO NOT PUT DANGEROUS DROP/DELETE OPERATION HERE
+    }
+}

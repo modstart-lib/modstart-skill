@@ -1,0 +1,25 @@
+{
+    "name": "BlogThemeDemo",
+    "title": "Blog演示主题",
+    "env": [
+        "laravel5",
+        "laravel9"
+    ],
+    "types": [
+        "PC",
+        "Mobile"
+    ],
+    "require": [
+        "Blog"
+    ],
+    "tags": [
+        "博客"
+    ],
+    "version": "1.0.0",
+    "author": "ModStart",
+    "description": "提供一个简洁优雅的博客演示主题",
+    "suggest": [
+    ],
+    "config": {
+    }
+}
